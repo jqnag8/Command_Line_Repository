@@ -21,11 +21,12 @@ def test_producto_cartesiano():
 #         determina si una relacion es reflexiva
 #     """
 #     resultado = True
-#     for x, y in relacion:
-#         if x != y:
+#     for (x, y) in relacion:
+#         if (x, x) not in relacion:
 #             resultado = False
 #             return resultado
 #     return restultado
+# TODO que no recorra tuplas ya analizadas
 
 # def test_es_reflexiva():
 #     assert es_reflexiva(producto_cartesiano({'a', 'b', 'v', 'h'}, {1, 2, 3, 4, 5, 6})) == False
