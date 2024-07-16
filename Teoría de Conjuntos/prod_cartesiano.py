@@ -10,8 +10,8 @@ def producto_cartesiano(set1: set, set2: set):
 
 def test_producto_cartesiano():
     assert producto_cartesiano({1, 2, 3}, {1, 2}) == {(1, 1), (1, 2), (2, 1), (2,2), (3, 1), (3, 2)}
-    assert producto_cartesiano({}, {}) == set()
-    assert producto_cartesiano({}, {1, 2}) == set()
+    assert producto_cartesiano(set(), set()) == set()
+    assert producto_cartesiano(set(), {1, 2}) == set()
 
 # ------ MAIN ------
 def main():
@@ -31,4 +31,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
