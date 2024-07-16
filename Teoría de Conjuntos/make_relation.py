@@ -27,7 +27,7 @@ def es_reflexiva(relacion: set) -> bool:
         determina si una relacion es reflexiva. Toma una relacion hecho por producto_cartesiano y el primer conjunto del A X B.
     """
     resultado = True
-    union1_2 = conjunto1 | conjunto2  # Devuelve la union de los conjuntos
+    a  # Devuelve la union de los conjuntos
     for elemento in union1_2: # Toma los primeras componentes de los pares ordenados para verificar la reflexividad.
         if (elemento, elemento) not in relacion:
             resultado = False

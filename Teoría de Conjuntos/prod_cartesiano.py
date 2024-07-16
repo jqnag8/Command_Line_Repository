@@ -25,6 +25,7 @@ def main():
     prod_carte = producto_cartesiano(conjunto_1, conjunto_2)
 
     print(f"AxB = {producto_cartesiano(conjunto_1, conjunto_2)}")
+    print(f"Ordenado en formato lista: {sorted(prod_carte)}")
     print(f"|AxB| = {len(prod_carte)}")
 
 
