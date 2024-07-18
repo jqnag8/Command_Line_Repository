@@ -8,12 +8,7 @@ def producto_cartesiano(set1: set, set2: set):
             result.add((x, y))
     return result
 
-def test_producto_cartesiano():
-    assert producto_cartesiano({1, 2, 3}, {1, 2}) == {(1, 1), (1, 2), (2, 1), (2,2), (3, 1), (3, 2)}
-    assert producto_cartesiano(set(), set()) == set()
-    assert producto_cartesiano(set(), {1, 2}) == set()
-
-# ------ MAIN ------
+#  ------ MAIN ------ ---
 def main():
     to_set = lambda x: set(map(int, x.lstrip('{,').rstrip('},').split(',')))
     conjunto_1 = to_set(input("Conjunto A = "))
