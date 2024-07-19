@@ -1,6 +1,6 @@
 from conjuntos import producto_cartesiano
 
-def crear_relacion(prod_cartesiano: set, ley: str) -> set:
+def crear_relacion(prod_cartesiano: set[tuple[int, int]], ley: str) -> set[tuple[int, int]]:
     """
         Genera un conjunto que resulta de hacer la relacion de un producto cartesiano.
     """
@@ -20,9 +20,9 @@ def crear_relacion(prod_cartesiano: set, ley: str) -> set:
         raise SyntaxError("Operación no reconocida")
 
 # ------ Inversa ------
-def relacion_inversa(relacion: set) -> set:
+def relacion_inversa(relacion: set[tuple[int, int]]) -> set:
     """
-    Crea una realacion inversa relacion-¹¥
+    Crea una realacion inversa a partir de una relacion dada
     """
     resultado = set()
     for (x,y) in relacion:
@@ -30,7 +30,7 @@ def relacion_inversa(relacion: set) -> set:
     return resultado
 
 # ------ Composicion ------
-def comp_relaciones(relacion1: set, relacion2: set) -> set:
+def comp_relaciones(relacion1: set[tuple[int, int]], relacion2: set[tuple[int, int]]) -> set[tuple[int, int]]:
     """
     Crea una composicion entre relacion1 y relacion2
     """
@@ -42,19 +42,18 @@ def comp_relaciones(relacion1: set, relacion2: set) -> set:
     return resultado
 
 # ------ Reflexividad ------
-def es_reflexiva(relacion: set) -> bool:
+def es_reflexiva(relacion: set[tuple[int, int]]) -> bool:
     """
         Recibe una relación y determina si es reflexiva.
     """
-    resultado = True
+
     for (x, y) in relacion:
         if (x, x) not in relacion or (y, y) not in relacion: # Verifica si están los pares ordenados que cumplen con la propiedad
-            resultado = False
-            return resultado
-    return resultado
+            return False
+    return True
 
 # ------ Simetria ------
-def es_simetrica(relacion: set) -> bool:
+def es_simetrica(relacion: set[tuple[int, int]]) -> bool:
     """
     Determina si una relacion es simétrica.
     """
@@ -65,7 +64,7 @@ def es_simetrica(relacion: set) -> bool:
     return True
 
 # ------ Antisimetria ------
-def es_antisimetrica(relacion: set) -> bool:
+def es_antisimetrica(relacion: set[tuple[int, int]]) -> bool:
     """
     Determina si una relacion es antisimetrica
     """
@@ -76,7 +75,7 @@ def es_antisimetrica(relacion: set) -> bool:
     return True
 
 # ------ Transitividad ------
-def es_transitiva(relacion: set) -> bool:
+def es_transitiva(relacion: set[tuple[int, int]]) -> bool:
     """
     Determina si una relacion es transitiva.
     """
@@ -89,21 +88,23 @@ def es_transitiva(relacion: set) -> bool:
 
 # ------ MAIN ------
 def main():
-    to_set = lambda x: set(map(int, x.lstrip('{,').rstrip('},').split(',')))
+    to_set = lambda x: set(map(int, x.lstrip('{,').rstrip('},').split(','))) # toma una lista de valores y lo formatea de forma que devuelva un conjunto
 
-    conjunto_1 = to_set(input("Conjunto A = "))
-    conjunto_2 = input("Conjunto B = ")
-    if (conjunto_2 == ''):
-        conjunto_2 = conjunto_1
+    relacion_extension = input("Crear relacion? (s/N)")
+
+    if relacion_extension == 'si':
+        relacion_final = to_set(input("Ingrese la relación: "))
     else:
-        conjunto_2 = to_set(conjunto_2)
-
-    print(producto_cartesiano(conjunto_1, conjunto_2))
-    ley_relacion = input("Ingrese la ley de la relacion: ")
-    relacion_final = crear_relacion(producto_cartesiano(conjunto_1,
-                                                          conjunto_2),
-                                      ley_relacion)
-    print(f"Relacion: {relacion_final}")
+        conjunto_1 = to_set(input("Conjunto A = "))
+        conjunto_2 = input("Conjunto B = ")
+        if (conjunto_2 == ''):
+            conjunto_2 = conjunto_1
+        else:
+            conjunto_2 = to_set(conjunto_2)
+        print(producto_cartesiano(conjunto_1, conjunto_2))
+        relacion_final = crear_relacion(producto_cartesiano(conjunto_1, conjunto_2),
+            input("Ingrese la ley de la relacion: "))
+        print(f"Relacion: {relacion_final}")
 
     print("Reflexividad: ", end=' ')
     if es_reflexiva(relacion_final):
@@ -113,6 +114,18 @@ def main():
 
     print("Simetría: ", end=' ')
     if es_simetrica(relacion_final):
+        print("Si")
+    else:
+        print("No")
+
+    print("Antisimetría: ", end=' ')
+    if es_antisimetrica(relacion_final):
+        print("Si")
+    else:
+        print("No")
+
+    print("Transitividad: ", end=' ')
+    if es_transitiva(relacion_final):
         print("Si")
     else:
         print("No")
