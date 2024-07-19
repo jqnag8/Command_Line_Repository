@@ -58,13 +58,11 @@ def es_simetrica(relacion: set) -> bool:
     """
     Determina si una relacion es simétrica.
     """
-    resultado = True
 
     for (x, y) in relacion:
         if (y, x) not in relacion:
-            resultado = False
-            return resultado
-    return resultado
+            return False
+    return True
 
 # ------ Antisimetria ------
 def es_antisimetrica(relacion: set) -> bool:
@@ -85,7 +83,7 @@ def es_transitiva(relacion: set) -> bool:
 
     for (a, b) in relacion:
         for (c, d) in relacion:
-            if b == c and (a, d) not in relacion:
+            if (b == c) and ((a, d) not in relacion):
                 return False
     return True
 

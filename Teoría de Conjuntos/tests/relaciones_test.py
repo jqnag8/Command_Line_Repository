@@ -4,7 +4,7 @@ import os
 # Agrega el directorio src al PATH
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from relaciones import comp_relaciones,relacion_inversa, es_reflexiva, es_simetrica, es_antisimetrica
+from relaciones import comp_relaciones,relacion_inversa, es_reflexiva, es_simetrica, es_antisimetrica, es_transitiva
 from conjuntos import producto_cartesiano
 
 # Comp de relaciones
@@ -33,6 +33,32 @@ def test_relacion_inversa():
     assert relacion_inversa({(1, 2), (2, 1)}) == {(2, 1), (1, 2)}
     assert relacion_inversa({(1, 2), (2, 1), (1, 2)}) == {(2, 1), (1, 2)}
     assert relacion_inversa({(1, 1), (2, 2), (3, 3)}) == {(1, 1), (2, 2), (3, 3)}
+
+# es_reflexiva
+def test_es_reflexiva():
+    # Caso de prueba 1: relación vacía
+    assert es_reflexiva(set()) == True
+
+    # Caso de prueba 2: relación con un solo par reflexivo
+    assert es_reflexiva({(1, 1)}) == True
+
+    # Caso de prueba 3: relación con un solo par no reflexivo
+    assert es_reflexiva({(1, 2)}) == False
+
+    # Caso de prueba 4: relación con múltiples pares, todos reflexivos
+    assert es_reflexiva({(1, 1), (2, 2)}) == True
+
+    # Caso de prueba 5: relación con algunos pares no reflexivos
+    assert es_reflexiva({(1, 1), (2, 2), (3, 4)}) == False
+
+    # Caso de prueba 6: relación con todos los pares reflexivos posibles
+    assert es_reflexiva({(1, 1), (2, 2), (3, 3)}) == True
+
+    # Caso de prueba 7: relación con pares adicionales que no afectan la reflexividad
+    assert es_reflexiva({(1, 1), (2, 2), (1, 2)}) == True
+
+    # Caso de prueba 8: relación sin todos los pares reflexivos necesarios
+    assert es_reflexiva({(1, 1), (2, 2), (2, 3)}) == False
 
 # es_simetrica
 def test_es_simetrica():
@@ -79,3 +105,32 @@ def test_es_antisimetrica():
 
     # Caso de prueba 7: relación mixta con pares que violan la antisimetría
     assert es_antisimetrica({(1, 2), (2, 1), (3, 3), (4, 4)}) == False
+
+# es_transitiva
+def test_es_transitiva():
+    # Caso de prueba 1: relación vacía
+    assert es_transitiva(set()) == True
+
+    # Caso de prueba 2: relación con un solo par
+    assert es_transitiva({(1, 2)}) == True
+
+    # Caso de prueba 3: relación con dos pares que no necesitan ser transitivos
+    assert es_transitiva({(1, 2), (3, 4)}) == True
+
+    # Caso de prueba 4: relación con pares transitivos
+    assert es_transitiva({(1, 2), (2, 3), (1, 3)}) == True
+
+    # Caso de prueba 5: relación con pares no transitivos
+    assert es_transitiva({(1, 2), (2, 3)}) == False
+
+    # Caso de prueba 6: relación con pares que forman un bucle transitivo
+    assert es_transitiva({(1, 2), (2, 3), (3, 4), (1, 4), (1, 3), (2, 4)}) == True
+
+    # Caso de prueba 7: relación con pares que no forman un bucle transitivo completo
+    assert es_transitiva({(1, 2), (2, 3), (3, 4)}) == False
+
+    # Caso de prueba 8: relación con pares idénticos
+    assert es_transitiva({(1, 1), (2, 2), (3, 3)}) == True
+
+    # Caso de prueba 9: relación con pares parcialmente transitivos
+    assert es_transitiva({(1, 2), (2, 3), (3, 4), (1, 3)}) == False
