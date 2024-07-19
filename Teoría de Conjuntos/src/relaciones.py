@@ -48,7 +48,7 @@ def es_reflexiva(relacion: set[tuple[int, int]]) -> bool:
     """
 
     for (x, y) in relacion:
-        if (x, x) not in relacion or (y, y) not in relacion: # Verifica si están los pares ordenados que cumplen con la propiedad
+        if (x, x) not in relacion or (y, y) not in relacion:
             return False
     return True
 
