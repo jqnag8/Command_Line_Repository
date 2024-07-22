@@ -90,10 +90,25 @@ def es_transitiva(relacion: set[tuple[int, int]]) -> bool:
 def main():
     to_set = lambda x: set(map(int, x.lstrip('{,').rstrip('},').split(','))) # toma una lista de valores y lo formatea de forma que devuelva un conjunto
 
-    relacion_extension = input("Crear relacion? (s/N)")
+    relacion_extension = input("Crear relación por extensión? (s/N): ")
 
-    if relacion_extension == 'si':
-        relacion_final = to_set(input("Ingrese la relación: "))
+    if relacion_extension == 'si' or relacion_extension == 's' or relacion_extension == 'Si':
+        relacion = input("Ingrese la relación con comas de por medio por cada par ordenado: ").replace("(", "").replace(")", "").replace(' ', '')  # Eliminar paréntesis
+        relacion_sin_pares = relacion.split(",")  # Separar por comas
+        it = iter(relacion_sin_pares)
+        relacion_final = set()
+        for x, y in zip(it, it):
+            # Intentar convertir a entero, si falla dejar como string
+            try:
+                x = int(x)
+            except ValueError:
+                pass
+            try:
+                y = int(y)
+            except ValueError:
+                pass
+            relacion_final.add((x, y))
+
     else:
         conjunto_1 = to_set(input("Conjunto A = "))
         conjunto_2 = input("Conjunto B = ")
@@ -101,10 +116,16 @@ def main():
             conjunto_2 = conjunto_1
         else:
             conjunto_2 = to_set(conjunto_2)
+
         print(producto_cartesiano(conjunto_1, conjunto_2))
+
         relacion_final = crear_relacion(producto_cartesiano(conjunto_1, conjunto_2),
-            input("Ingrese la ley de la relacion: "))
-        print(f"Relacion: {relacion_final}")
+        input("Ingrese la ley de la relación: "))
+
+    print(f"Relacion: {relacion_final}")
+
+    # Verificacion de propiedades
+    print("-- Propiedades de la relacion --")
 
     print("Reflexividad: ", end=' ')
     if es_reflexiva(relacion_final):
