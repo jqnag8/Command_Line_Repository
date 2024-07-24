@@ -1,3 +1,5 @@
+from itertools import combinations
+
 def producto_cartesiano(set1: set, set2: set):
     """
         Genera el producto cartesiano entre dos conjuntos
@@ -8,6 +10,15 @@ def producto_cartesiano(set1: set, set2: set):
             result.add((x, y))
     return result
 
+# ------ Conjunto Partes ------
+def conjunto_partes(conjunto: set) -> set[set]:
+    partes = set()
+
+    for combinacion in range(len(conjunto) + 1):
+        for subconjunto in combinations(conjunto, combinacion):
+            partes.add(frozenset(subconjunto))
+
+    return partes
 #  ------ MAIN ------ ---
 def main():
     to_set = lambda x: set(map(int, x.lstrip('{,').rstrip('},').split(',')))
