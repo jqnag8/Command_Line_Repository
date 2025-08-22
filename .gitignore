@@ -1,5 +1,6 @@
-# Directorios
+# Directories
 __pycache__
 
-# Archivos
+# Files
 *.out
+*.txt

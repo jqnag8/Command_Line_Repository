@@ -12,6 +12,9 @@ def producto_cartesiano(set1: set, set2: set):
 
 # ------ Conjunto Partes ------
 def conjunto_partes(conjunto: set) -> set[set]:
+    """
+        Genera el conjunto partes de un conjunto dado.
+    """
     partes = set()
 
     for combinacion in range(len(conjunto) + 1):
