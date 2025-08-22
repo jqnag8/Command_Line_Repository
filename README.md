@@ -1,3 +1,4 @@
-# Proyectos-CLI
+# Introduction
 
-Proyectos en Python en CLI que uso como herramientas para el dia a dia.
+A collection of CLI projects for everyday use. The dependencies list for every
+app is in its folder's README.
