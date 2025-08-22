@@ -3,9 +3,9 @@
 A collection of CLI projects for everyday use. The dependencies list for every
 app is in its folder's README.
 
-# CLI Applications
+# CLI Applications (folders)
 
-## 'bash_commands' folder
+## bash_commands
 
 Some bash commands that are coded in C or Bash.
 
